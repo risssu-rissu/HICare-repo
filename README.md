@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# HiCare — Smart IoT Heart Rate Monitor 
 
-## Getting Started
+HiCare is a modern web application paired with an IoT device to provide real-time, accurate heart rate monitoring. This project aims to bring clinical-grade insights to a fast, responsive, and beautifully designed browser dashboard.
 
-First, run the development server:
+## 🚀 Tech Stack
 
+The platform has been migrated from a legacy HTML/Firebase architecture to a modern serverless stack:
+
+- **Frontend Framework**: [Next.js (App Router)](https://nextjs.org) for robust routing, server-side rendering, and seamless API integration.
+- **Backend & Database**: [Supabase](https://supabase.com/) providing secure authentication and an open-source PostgreSQL database.
+- **Data Visualization**: [Chart.js](https://www.chartjs.org/) for rendering the live interactive BPM timeline.
+- **IoT Hardware**: Pulse Sensor Amped coupled with an ESP32 microcontroller, transmitting BPM data over WiFi.
+- **Styling**: Modern CSS with glassmorphism, fluid animations, and a rich "Medical Blue + White" theme tailored for health professionals.
+
+## 🔒 Authentication (User & Admin)
+
+The dashboard is secured. Users must create an account or sign in to monitor their heart vitals.
+- **Mock / Development Mode**: By default, the app uses a simulated local auth context if Supabase is not fully configured yet. 
+- **Admin Access**: Logging in with the email `admin@hicare.com` grants Admin privileges, unlocking the System Administration panel on the dashboard (showing active devices, total users, and alerts).
+
+## 🛠️ Getting Started
+
+First, install dependencies:
+```bash
+npm install
+```
+
+Run the development server:
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## ⚙️ Environment Variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+To connect to your real Supabase instance, create a `.env.local` file in the root directory:
 
-## Learn More
+```env
+NEXT_PUBLIC_SUPABASE_URL=your-supabase-url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
+```
 
-To learn more about Next.js, take a look at the following resources:
+If these are not provided, the app will gracefully fall back to a mock data and simulated authentication mode for demonstration purposes.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📡 Hardware Setup
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The accompanying ESP32 code is located in `esp32-hicare-nextjs.ino`. Flash it onto your ESP32 microcontroller and update the WiFi credentials and API endpoints inside the sketch to point to your Next.js API routes or Supabase REST endpoints.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+*Built for the PKK Project*
