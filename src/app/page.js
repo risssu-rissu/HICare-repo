@@ -182,7 +182,7 @@ export default function LandingPage() {
             <span>HiCare</span>
           </Link>
           <ul
-            className="nav-menu"
+            className={`nav-menu ${isMenuOpen ? "nav-menu-open" : ""}`}
             id="nav-menu"
             style={
               isMenuOpen
@@ -193,10 +193,13 @@ export default function LandingPage() {
                     top: "100%",
                     left: 0,
                     right: 0,
-                    background: "rgba(10,22,40,.95)",
-                    padding: "1rem 2rem",
-                    gap: "1rem",
-                    borderBottom: "1px solid rgba(255,255,255,.08)",
+                    background: "rgba(255,255,255,.98)",
+                    backdropFilter: "blur(16px)",
+                    padding: "1rem 1.5rem",
+                    gap: ".25rem",
+                    borderBottom: "1px solid var(--border)",
+                    borderRadius: "0 0 14px 14px",
+                    boxShadow: "0 8px 32px rgba(0,0,0,.08)",
                   }
                 : {}
             }
@@ -221,13 +224,25 @@ export default function LandingPage() {
                 Product
               </a>
             </li>
+            {isMenuOpen && (
+              <li style={{ marginTop: ".5rem" }}>
+                <Link
+                  href="/dashboard"
+                  className="btn btn-primary"
+                  style={{ width: "100%", justifyContent: "center" }}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Open Dashboard
+                </Link>
+              </li>
+            )}
           </ul>
           <div className="nav-actions">
             <Link href="/dashboard" className="btn btn-outline" id="btn-dashboard">
               Open Dashboard
             </Link>
             <button
-              className="hamburger"
+              className={`hamburger ${isMenuOpen ? "active" : ""}`}
               id="hamburger"
               aria-label="Toggle menu"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
