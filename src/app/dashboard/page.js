@@ -125,12 +125,12 @@ export default function Dashboard() {
           </div>
           
           <button onClick={logout} style={{ background: "transparent", border: "1px solid rgba(255,255,255,0.2)", color: "var(--text-light)", padding: "0.4rem 0.8rem", borderRadius: "6px", cursor: "pointer", fontSize: "0.85rem", transition: "all 0.2s" }}>
-            Sign Out
+            Keluar
           </button>
 
           <div className="connection-badge">
             <span className={`connection-dot ${isConnected ? "" : "offline"}`}></span>
-            <span>{isConnected ? "Connected" : "Waiting Data..."}</span>
+            <span>{isConnected ? "Terhubung" : "Menunggu Data..."}</span>
           </div>
         </div>
       </header>
@@ -161,7 +161,7 @@ export default function Dashboard() {
               <span className={`metric-trend ${trend.cls}`}>{trend.text}</span>
             </div>
             <div className="metric-value">{currentAvgBPM || "--"}</div>
-            <div className="metric-name">Latest Avg BPM</div>
+            <div className="metric-name">BPM Rata-rata Terbaru</div>
           </div>
           <div className="metric-card fade-in">
             <div className="metric-header">
@@ -169,7 +169,7 @@ export default function Dashboard() {
               <span className="metric-trend stable">—</span>
             </div>
             <div className="metric-value">{avgOverall}</div>
-            <div className="metric-name">Overall Avg</div>
+            <div className="metric-name">Rata-rata Keseluruhan</div>
           </div>
           <div className="metric-card fade-in">
             <div className="metric-header">
@@ -177,7 +177,7 @@ export default function Dashboard() {
               <span className="metric-trend stable">—</span>
             </div>
             <div className="metric-value">{minBpm}</div>
-            <div className="metric-name">Lowest Session</div>
+            <div className="metric-name">Sesi Terendah</div>
           </div>
           <div className="metric-card fade-in">
             <div className="metric-header">
@@ -185,13 +185,13 @@ export default function Dashboard() {
               <span className="metric-trend stable">—</span>
             </div>
             <div className="metric-value">{maxBpm}</div>
-            <div className="metric-name">Highest Session</div>
+            <div className="metric-name">Sesi Tertinggi</div>
           </div>
         </section>
 
         <section className="chart-section fade-in" id="chart-section">
           <div className="section-header">
-            <h2 className="section-title">Session Trends</h2>
+            <h2 className="section-title">Tren Sesi</h2>
           </div>
           <div className="chart-container">
             <HeartChart timestamps={chartDataTimestamps} bpmHistory={chartDataBPM} />
@@ -201,12 +201,12 @@ export default function Dashboard() {
         <div className="bottom-grid">
           <div className="panel fade-in" id="history-panel">
             <div className="section-header">
-              <h2 className="section-title">Recent Scanning Sessions</h2>
+              <h2 className="section-title">Sesi Scanning Terbaru</h2>
             </div>
             <table className="history-table">
               <thead>
                 <tr>
-                  <th>Date &amp; Time</th>
+                  <th>Tanggal & Waktu</th>
                   <th>Avg BPM</th>
                   <th>Status</th>
                 </tr>

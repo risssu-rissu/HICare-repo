@@ -29,7 +29,7 @@ export default function Login() {
         router.push("/dashboard");
       }
     } catch (err) {
-      setError("An unexpected error occurred. Please try again.");
+      setError("Terjadi kesalahan. Silakan coba lagi.");
     } finally {
       setIsLoading(false);
     }
@@ -42,27 +42,27 @@ export default function Login() {
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M19 12H5M12 19l-7-7 7-7" />
           </svg>
-          Back to Home
+          Kembali ke Beranda
         </Link>
       </div>
 
       <div className="auth-container">
         <div style={{ textAlign: "center", marginBottom: "1.5rem" }}>
           <img src="/favicon.svg" alt="HiCare Logo" style={{ width: "48px", height: "48px", marginBottom: "1rem" }} />
-          <h1 className="auth-title auth-title-gradient">Welcome Back</h1>
-          <p className="auth-subtitle">Sign in to your HiCare dashboard</p>
+          <h1 className="auth-title auth-title-gradient">Selamat Datang Kembali</h1>
+          <p className="auth-subtitle">Masuk ke dashboard HiCare Anda</p>
         </div>
 
         {error && <div className="auth-error">{error}</div>}
 
         <form className="auth-form" onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="email">Email Address</label>
+            <label htmlFor="email">Alamat Email</label>
             <input 
               type="email" 
               id="email" 
               className="form-input" 
-              placeholder="you@example.com"
+              placeholder="anda@contoh.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required 
@@ -70,7 +70,7 @@ export default function Login() {
           </div>
 
           <div className="form-group">
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password">Kata Sandi</label>
             <input 
               type="password" 
               id="password" 
@@ -83,12 +83,12 @@ export default function Login() {
           </div>
 
           <button type="submit" className="auth-btn" disabled={isLoading}>
-            {isLoading ? "Signing in..." : "Sign In"}
+            {isLoading ? "Masuk..." : "Masuk"}
           </button>
         </form>
 
         <div className="auth-footer">
-          Don't have an account? <Link href="/register" className="auth-link">Create Account</Link>
+          Belum punya akun? <Link href="/register" className="auth-link">Buat Akun</Link>
         </div>
       </div>
     </div>

@@ -22,7 +22,12 @@ export default function Register() {
     setError("");
 
     if (password !== confirmPassword) {
-      setError("Passwords do not match");
+      setError("Kata sandi tidak cocok");
+      return;
+    }
+
+    if (password.length < 6) {
+      setError("Kata sandi minimal 6 karakter");
       return;
     }
 
@@ -37,7 +42,7 @@ export default function Register() {
         router.push("/dashboard");
       }
     } catch (err) {
-      setError("An unexpected error occurred. Please try again.");
+      setError("Terjadi kesalahan. Silakan coba lagi.");
     } finally {
       setIsLoading(false);
     }
@@ -50,27 +55,27 @@ export default function Register() {
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M19 12H5M12 19l-7-7 7-7" />
           </svg>
-          Back to Home
+          Kembali ke Beranda
         </Link>
       </div>
 
       <div className="auth-container" style={{ maxWidth: '480px' }}>
         <div style={{ textAlign: "center", marginBottom: "1.5rem" }}>
           <img src="/favicon.svg" alt="HiCare Logo" style={{ width: "48px", height: "48px", marginBottom: "1rem" }} />
-          <h1 className="auth-title auth-title-gradient">Create Account</h1>
-          <p className="auth-subtitle">Join HiCare to monitor your heart vitals</p>
+          <h1 className="auth-title auth-title-gradient">Buat Akun</h1>
+          <p className="auth-subtitle">Bergabung dengan HiCare untuk memantau kesehatan jantungmu</p>
         </div>
 
         {error && <div className="auth-error">{error}</div>}
 
         <form className="auth-form" onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="name">Full Name</label>
+            <label htmlFor="name">Nama Lengkap</label>
             <input 
               type="text" 
               id="name" 
               className="form-input" 
-              placeholder="John Doe"
+              placeholder="Nama Lengkap"
               value={name}
               onChange={(e) => setName(e.target.value)}
               required 
@@ -78,12 +83,12 @@ export default function Register() {
           </div>
 
           <div className="form-group">
-            <label htmlFor="email">Email Address</label>
+            <label htmlFor="email">Alamat Email</label>
             <input 
               type="email" 
               id="email" 
               className="form-input" 
-              placeholder="you@example.com"
+              placeholder="anda@contoh.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required 
@@ -92,7 +97,7 @@ export default function Register() {
 
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
             <div className="form-group">
-              <label htmlFor="password">Password</label>
+              <label htmlFor="password">Kata Sandi</label>
               <input 
                 type="password" 
                 id="password" 
@@ -104,7 +109,7 @@ export default function Register() {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="confirmPassword">Confirm Password</label>
+              <label htmlFor="confirmPassword">Konfirmasi Kata Sandi</label>
               <input 
                 type="password" 
                 id="confirmPassword" 
@@ -118,12 +123,12 @@ export default function Register() {
           </div>
 
           <button type="submit" className="auth-btn" disabled={isLoading}>
-            {isLoading ? "Creating Account..." : "Sign Up"}
+            {isLoading ? "Membuat Akun..." : "Daftar"}
           </button>
         </form>
 
         <div className="auth-footer">
-          Already have an account? <Link href="/login" className="auth-link">Sign In</Link>
+          Sudah punya akun? <Link href="/login" className="auth-link">Masuk</Link>
         </div>
       </div>
     </div>

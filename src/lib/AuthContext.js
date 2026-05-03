@@ -11,7 +11,7 @@ export function AuthProvider({ children }) {
   const router = useRouter();
 
   useEffect(() => {
-    // Check localStorage for mock session on mount
+    // Check localStorage for session on mount
     const storedUser = localStorage.getItem("hicare_session");
     if (storedUser) {
       setUser(JSON.parse(storedUser));
@@ -21,46 +21,55 @@ export function AuthProvider({ children }) {
 
   const login = async (email, password) => {
     try {
-      // Mock login since we moved away from Supabase
-      // In a real app, you would make a fetch request to /api/auth/login here
       if (!email || !password) {
-        return { error: { message: "Please enter email and password" } };
+        return { error: { message: "Masukkan email dan password" } };
       }
 
-      const authUser = {
-        email: email,
-        name: email.split('@')[0],
-        role: email === 'admin@hicare.com' ? "admin" : "user",
-        id: "mock-user-id",
-      };
-      
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await res.json();
+
+      if (!data.success) {
+        return { error: { message: data.error || "Login gagal" } };
+      }
+
+      const authUser = data.user;
       setUser(authUser);
       localStorage.setItem("hicare_session", JSON.stringify(authUser));
       return { error: null, user: authUser };
     } catch (err) {
-      return { error: { message: "Network error" } };
+      return { error: { message: "Kesalahan jaringan. Coba lagi." } };
     }
   };
 
   const register = async (name, email, password) => {
     try {
-      // Mock register
       if (!email || !password || !name) {
-        return { error: { message: "Please fill all fields" } };
+        return { error: { message: "Semua field harus diisi" } };
       }
 
-      const authUser = {
-        email: email,
-        name: name,
-        role: "user",
-        id: "mock-user-id",
-      };
-      
+      const res = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, password }),
+      });
+
+      const data = await res.json();
+
+      if (!data.success) {
+        return { error: { message: data.error || "Pendaftaran gagal" } };
+      }
+
+      const authUser = data.user;
       setUser(authUser);
       localStorage.setItem("hicare_session", JSON.stringify(authUser));
       return { error: null, user: authUser };
     } catch (err) {
-      return { error: { message: "Network error" } };
+      return { error: { message: "Kesalahan jaringan. Coba lagi." } };
     }
   };
 

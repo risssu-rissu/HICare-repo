@@ -588,7 +588,7 @@ a:hover { color:var(--blue-900); }
   background:var(--bg-alt);
 }
 .footer-inner {
-  display:grid; grid-template-columns:2fr 1fr 1fr; gap:3rem;
+  display:grid; grid-template-columns:1.5fr 1fr 1fr 1fr; gap:2rem;
   margin-bottom:2rem;
 }
 .footer-brand p {
