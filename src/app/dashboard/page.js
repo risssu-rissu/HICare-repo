@@ -14,7 +14,7 @@ export default function Dashboard() {
 
   const [history, setHistory] = useState([]);
   const [chartRange, setChartRange] = useState(30);
-  
+
   const [currentAvgBPM, setCurrentAvgBPM] = useState(0);
   const [prevAvgBPM, setPrevAvgBPM] = useState(0);
   const [isConnected, setIsConnected] = useState(false);
@@ -42,13 +42,13 @@ export default function Dashboard() {
     try {
       const res = await fetch("/api/history?limit=30");
       const result = await res.json();
-      
+
       if (result.success && result.data.length > 0) {
         setIsConnected(true);
         const data = result.data.reverse(); // oldest first for charts
-        
+
         setHistory(data);
-        
+
         const latest = data[data.length - 1];
         setCurrentAvgBPM((prev) => {
           if (prev !== latest.avgBpm) {
@@ -104,7 +104,7 @@ export default function Dashboard() {
     <div className="dashboard-page-wrapper dashboard-page">
       <header className="header" id="header">
         <div className="logo">
-          <img src="/favicon.svg" alt="HiCare logo" />
+          <img src="/logo.png" alt="HiCare logo" />
           <span>HiCare</span>
         </div>
 
@@ -121,7 +121,7 @@ export default function Dashboard() {
             {user.role === "admin" && <span style={{ background: "var(--primary)", color: "#fff", padding: "0.2rem 0.6rem", borderRadius: "12px", fontSize: "0.75rem", fontWeight: "bold" }}>ADMIN</span>}
             <span style={{ fontWeight: 500 }}>{user.name}</span>
           </div>
-          
+
           <button onClick={logout} style={{ background: "transparent", border: "1px solid rgba(255,255,255,0.2)", color: "var(--text-light)", padding: "0.4rem 0.8rem", borderRadius: "6px", cursor: "pointer", fontSize: "0.85rem", transition: "all 0.2s" }}>
             Keluar
           </button>
@@ -201,34 +201,36 @@ export default function Dashboard() {
             <div className="section-header">
               <h2 className="section-title">Sesi Scanning Terbaru</h2>
             </div>
-            <table className="history-table">
-              <thead>
-                <tr>
-                  <th>Tanggal & Waktu</th>
-                  <th>Avg BPM</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                {[...history].reverse().map((ses, i) => (
-                  <tr key={ses._id || i}>
-                    <td>
-                      <div>{new Date(ses.timestamp).toLocaleDateString()}</div>
-                      <div className="history-sub">
-                        {new Date(ses.timestamp).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" })}
-                      </div>
-                    </td>
-                    <td><strong>{ses.avgBpm}</strong> BPM</td>
-                    <td><span className={`status-pill ${classifyHealth(ses.avgBpm).pill}`}>{classifyHealth(ses.avgBpm).label}</span></td>
-                  </tr>
-                ))}
-                {history.length === 0 && (
+            <div style={{ maxHeight: "360px", overflowY: "auto", paddingRight: "5px" }}>
+              <table className="history-table">
+                <thead>
                   <tr>
-                    <td colSpan="3" style={{ textAlign: "center", padding: "2rem", color: "var(--text-light)" }}>Belum ada sesi pemindaian</td>
+                    <th>Tanggal & Waktu</th>
+                    <th>Avg BPM</th>
+                    <th>Status</th>
                   </tr>
-                )}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {[...history].reverse().map((ses, i) => (
+                    <tr key={ses._id || i}>
+                      <td>
+                        <div>{new Date(ses.timestamp).toLocaleDateString()}</div>
+                        <div className="history-sub">
+                          {new Date(ses.timestamp).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" })}
+                        </div>
+                      </td>
+                      <td><strong>{ses.avgBpm}</strong> BPM</td>
+                      <td><span className={`status-pill ${classifyHealth(ses.avgBpm).pill}`}>{classifyHealth(ses.avgBpm).label}</span></td>
+                    </tr>
+                  ))}
+                  {history.length === 0 && (
+                    <tr>
+                      <td colSpan="3" style={{ textAlign: "center", padding: "2rem", color: "var(--text-light)" }}>Belum ada sesi pemindaian</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </main>

@@ -178,7 +178,7 @@ export default function LandingPage() {
       <nav className={`nav ${isScrolled ? "scrolled" : ""}`} id="nav">
         <div className="nav-inner container">
           <Link href="#" className="nav-logo">
-            <img src="/favicon.svg" alt="HiCare" />
+            <img src="/logo.png" alt="HiCare" />
             <span>HiCare</span>
           </Link>
           <ul
