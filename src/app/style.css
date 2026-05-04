@@ -1,12 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+.dashboard-page-wrapper {
 /* ============================================================
    HiCare Dashboard — style.css
    Premium IoT Heart Rate Monitor Dashboard Styles
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
 
 /* ─── Design Tokens ─── */
-:root {
+& {
   --primary: #1565C0;
   --primary-light: #1E88E5;
   --primary-dark: #0D47A1;
@@ -49,13 +52,14 @@
   box-sizing: border-box;
 }
 
-body {
+& {
   font-family: var(--font);
   background: var(--bg-body);
   color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.6;
+  min-height: 100vh;
 }
 
 /* ─── Animations ─── */
@@ -193,10 +197,10 @@ body {
 /* ─── Hero / BPM Section ─── */
 .hero {
   display: grid;
-  grid-template-columns: 240px 1fr;
-  gap: 1.5rem;
+  grid-template-columns: 200px 1fr;
+  gap: 1rem;
   align-items: center;
-  padding: 1.5rem;
+  padding: 1rem;
   background: var(--bg-card);
   border-radius: var(--radius-xl);
   border: 1px solid var(--border);
@@ -212,8 +216,8 @@ body {
 
 /* BPM Ring */
 .bpm-ring {
-  width: 150px;
-  height: 150px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
   display: flex;
   flex-direction: column;
@@ -235,7 +239,7 @@ body {
 }
 
 .bpm-value {
-  font-size: 3.2rem;
+  font-size: 2.4rem;
   font-weight: 800;
   color: var(--text-primary);
   line-height: 1;
@@ -288,7 +292,7 @@ body {
 /* Waveform */
 .waveform-container {
   width: 100%;
-  height: 130px;
+  height: 100px;
   border-radius: var(--radius-md);
   overflow: hidden;
   background: linear-gradient(180deg, rgba(21, 101, 192, 0.02), rgba(21, 101, 192, 0.06));
@@ -601,4 +605,6 @@ body {
   .metric-card {
     padding: 0.85rem;
   }
+}
+
 }

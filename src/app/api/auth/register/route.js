@@ -1,12 +1,14 @@
 import { NextResponse } from 'next/server';
 import dbConnect from '@/lib/mongodb';
 import User from '@/models/User';
+import bcrypt from 'bcryptjs';
 
 export async function POST(request) {
   try {
     await dbConnect();
 
-    const { name, email, password } = await request.json();
+    const body = await request.json();
+    const { name, email, password } = body;
 
     // Validasi input
     if (!name || !email || !password) {
@@ -32,11 +34,15 @@ export async function POST(request) {
       );
     }
 
+    // Hash password
+    const salt = bcrypt.genSaltSync(10);
+    const hashedPassword = bcrypt.hashSync(password, salt);
+
     // Buat user baru
     const user = await User.create({
       name,
       email: email.toLowerCase(),
-      password,
+      password: hashedPassword,
       role: 'user',
     });
 

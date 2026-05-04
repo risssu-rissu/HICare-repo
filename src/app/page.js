@@ -174,7 +174,7 @@ export default function LandingPage() {
   };
 
   return (
-    <>
+    <div className="landing-page">
       <nav className={`nav ${isScrolled ? "scrolled" : ""}`} id="nav">
         <div className="nav-inner container">
           <Link href="#" className="nav-logo">
@@ -564,7 +564,6 @@ export default function LandingPage() {
             Dashboard Dirancang untuk<br />
             <span className="gradient-text">Profesional Kesehatan</span>
           </h2>
-          <p className="section-subheading">Bersih, intuitif, dan penuh insight real-time</p>
 
           <div className="product-preview">
             <div className="browser-frame">
@@ -608,7 +607,7 @@ export default function LandingPage() {
                 </div>
               </div>
               <h3 className="team-name">Faris Hawari</h3>
-              <p className="team-role">Lead Developer</p>
+              <p className="team-role">Web & IoT Developer</p>
             </div>
 
             {/* Team Member 2 */}
@@ -719,6 +718,6 @@ export default function LandingPage() {
           <p>&copy; 2026 HiCare. All rights reserved. Built for PKK.</p>
         </div>
       </footer>
-    </>
+    </div>
   );
 }

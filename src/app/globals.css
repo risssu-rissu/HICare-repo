@@ -1,1 +1,6 @@
 /* Cleared default Next.js globals to prevent conflicts with legacy CSS */
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}

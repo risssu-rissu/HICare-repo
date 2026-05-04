@@ -49,7 +49,7 @@ export default function Register() {
   };
 
   return (
-    <div className="auth-page">
+    <div className="auth-page-wrapper auth-page">
       <div className="auth-header">
         <Link href="/" className="auth-back">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -109,7 +109,7 @@ export default function Register() {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="confirmPassword">Konfirmasi Kata Sandi</label>
+              <label htmlFor="confirmPassword">Ulangi Sandi</label>
               <input 
                 type="password" 
                 id="confirmPassword" 

@@ -1,6 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
 
-:root {
+.auth-page-wrapper {
+
+
+& {
   /* Brand Blues matching the app */
   --auth-blue-900:    #0D47A1;
   --auth-blue-700:    #1565C0;
@@ -27,7 +30,7 @@
   --auth-transition:  .3s cubic-bezier(.4,0,.2,1);
 }
 
-.auth-page {
+& {
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -48,7 +51,7 @@
   pointer-events: none;
 }
 
-.auth-page::before {
+&::before {
   content: "";
   position: absolute;
   width: 600px;
@@ -60,7 +63,7 @@
   animation: auth-float 15s ease-in-out infinite;
 }
 
-.auth-page::after {
+&::after {
   content: "";
   position: absolute;
   width: 500px;
@@ -282,4 +285,6 @@
   .auth-header {
     padding: 1rem 1.5rem;
   }
+}
+
 }

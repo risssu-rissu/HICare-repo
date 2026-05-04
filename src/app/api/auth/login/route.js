@@ -1,12 +1,14 @@
 import { NextResponse } from 'next/server';
 import dbConnect from '@/lib/mongodb';
 import User from '@/models/User';
+import bcrypt from 'bcryptjs';
 
 export async function POST(request) {
   try {
     await dbConnect();
 
-    const { email, password } = await request.json();
+    const body = await request.json();
+    const { email, password } = body;
 
     // Validasi input
     if (!email || !password) {
@@ -26,7 +28,7 @@ export async function POST(request) {
     }
 
     // Bandingkan password
-    const isMatch = await user.comparePassword(password);
+    const isMatch = bcrypt.compareSync(password, user.password);
     if (!isMatch) {
       return NextResponse.json(
         { success: false, error: 'Email atau password salah' },

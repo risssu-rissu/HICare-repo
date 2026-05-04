@@ -1,11 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap');
+
+.landing-page {
 /* ============================================================
    HiCare — Landing Page Styles (Blue + White Theme)
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap');
+
 
 /* ---------- Variables ---------- */
-:root {
+& {
   --blue-900:    #0D47A1;
   --blue-800:    #1256B8;
   --blue-700:    #1565C0;
@@ -42,9 +45,9 @@
 }
 
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior:smooth; -webkit-font-smoothing:antialiased; }
+& { scroll-behavior:smooth; -webkit-font-smoothing:antialiased; }
 
-body {
+& {
   font-family: var(--font-body);
   background: var(--bg-body);
   color: var(--text);
@@ -789,4 +792,6 @@ a:hover { color:var(--blue-900); }
 @media (max-width:768px) {
   html, body { overflow-x:hidden; }
   .hero-bg-shapes .shape { display:none; }
+}
+
 }

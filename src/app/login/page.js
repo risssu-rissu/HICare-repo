@@ -36,7 +36,7 @@ export default function Login() {
   };
 
   return (
-    <div className="auth-page">
+    <div className="auth-page-wrapper auth-page">
       <div className="auth-header">
         <Link href="/" className="auth-back">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

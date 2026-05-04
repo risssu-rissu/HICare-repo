@@ -101,18 +101,16 @@ export default function Dashboard() {
   }
 
   return (
-    <>
+    <div className="dashboard-page-wrapper dashboard-page">
       <header className="header" id="header">
         <div className="logo">
           <img src="/favicon.svg" alt="HiCare logo" />
           <span>HiCare</span>
         </div>
 
-        <ul className="nav-links">
-          <li><a href="#" className="active" id="nav-dashboard">Dashboard</a></li>
-          <li><a href="#chart-section" id="nav-analytics">Analytics</a></li>
-          <li><a href="#history-panel" id="nav-history">History</a></li>
-        </ul>
+        <div style={{ fontWeight: "600", fontSize: "1.1rem", color: "rgba(255, 255, 255, 0.9)", letterSpacing: "0.5px" }}>
+          HiCare Dashboard
+        </div>
 
         <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
           <Link href="/" className="nav-back" style={{ textDecoration: "none", display: "flex", alignItems: "center", gap: "0.4rem", padding: "0.4rem 0.8rem", background: "var(--blue-50)", color: "var(--blue-700)", border: "1px solid var(--blue-100)", borderRadius: "6px", fontSize: "0.85rem", fontWeight: "600" }}>
@@ -238,6 +236,6 @@ export default function Dashboard() {
       <footer className="footer">
         <p>&copy; 2026 <strong>HiCare</strong> — IoT Heart Rate Monitor &middot; Mongoose Edition &middot; v2.0.0</p>
       </footer>
-    </>
+    </div>
   );
 }
