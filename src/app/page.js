@@ -492,8 +492,8 @@ export default function LandingPage() {
           <div className="stack-grid">
             <div className="stack-card">
               <div className="stack-icon">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                  <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
                 </svg>
               </div>
               <h3>Pulse Sensor Amped</h3>
@@ -501,8 +501,17 @@ export default function LandingPage() {
             </div>
             <div className="stack-card">
               <div className="stack-icon">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                  <path d="M12 2A10 10 0 1 0 22 12 10 10 0 0 0 12 2zM12 18V12l-5-2V7" />
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="4" y="4" width="16" height="16" rx="2" ry="2" />
+                  <rect x="9" y="9" width="6" height="6" />
+                  <line x1="9" y1="1" x2="9" y2="4" />
+                  <line x1="15" y1="1" x2="15" y2="4" />
+                  <line x1="9" y1="20" x2="9" y2="23" />
+                  <line x1="15" y1="20" x2="15" y2="23" />
+                  <line x1="20" y1="9" x2="23" y2="9" />
+                  <line x1="20" y1="14" x2="23" y2="14" />
+                  <line x1="1" y1="9" x2="4" y2="9" />
+                  <line x1="1" y1="14" x2="4" y2="14" />
                 </svg>
               </div>
               <h3>ESP32</h3>
@@ -510,8 +519,9 @@ export default function LandingPage() {
             </div>
             <div className="stack-card">
               <div className="stack-icon">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                  <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M8 16V8l8 8V8" />
                 </svg>
               </div>
               <h3>Next.js</h3>
@@ -519,8 +529,10 @@ export default function LandingPage() {
             </div>
             <div className="stack-card">
               <div className="stack-icon">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                  <path d="M3 3v18h18M18 9l-5-5-5 5-5-5" />
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <ellipse cx="12" cy="5" rx="9" ry="3" />
+                  <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" />
+                  <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
                 </svg>
               </div>
               <h3>MongoDB</h3>
@@ -591,14 +603,14 @@ export default function LandingPage() {
               <div className="team-photo-wrap">
                 <img src="/paris.png" alt="Developer 1" className="team-photo" />
                 <div className="team-socials">
-                  <a href="#" aria-label="Instagram">
+                  <a href="https://www.instagram.com/fariss.hw?igsh=MXFnaGlhbmp2azN5eA==" aria-label="Instagram">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
                       <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
                       <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
                     </svg>
                   </a>
-                  <a href="#" aria-label="LinkedIn">
+                  <a href="https://www.linkedin.com/in/faris-hawari-5aa21a371?utm_source=share_via&utm_content=profile&utm_medium=member_android" aria-label="LinkedIn">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z" />
                       <circle cx="4" cy="4" r="2" />
@@ -615,14 +627,14 @@ export default function LandingPage() {
               <div className="team-photo-wrap">
                 <img src="/ajri.png" alt="Developer 2" className="team-photo" />
                 <div className="team-socials">
-                  <a href="#" aria-label="Instagram">
+                  <a href="https://www.instagram.com/atengninja?igsh=NW5lNThqZmJ6bDh5" aria-label="Instagram">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
                       <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
                       <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
                     </svg>
                   </a>
-                  <a href="#" aria-label="LinkedIn">
+                  <a href="" aria-label="LinkedIn">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z" />
                       <circle cx="4" cy="4" r="2" />
@@ -686,7 +698,7 @@ export default function LandingPage() {
             <p style={{ color: "var(--text-muted)", fontSize: ".85rem", marginBottom: "1rem", lineHeight: 1.6 }}>
               Punya pertanyaan tentang HiCare? Kami senang mendengar dari Anda!
             </p>
-            <a href="mailto:hello@hicare.example.com" style={{ display: "inline-flex", alignItems: "center", gap: ".5rem" }}>
+            <a href="mailto:hicare.healty@gmail.com" style={{ display: "inline-flex", alignItems: "center", gap: ".5rem" }}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
                 <polyline points="22,6 12,13 2,6" />
@@ -694,21 +706,16 @@ export default function LandingPage() {
               Kirim Email
             </a>
             <div className="social-links" style={{ display: "flex", gap: "1rem", marginTop: "1rem" }}>
-              <a href="#" aria-label="Instagram" style={{ color: "var(--text-secondary)" }}>
+              <a href="https://www.instagram.com/hicare.healty/?utm_source=ig_web_button_share_sheet" aria-label="Instagram" style={{ color: "var(--text-secondary)" }}>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
                   <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
                   <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
                 </svg>
               </a>
-              <a href="#" aria-label="TikTok" style={{ color: "var(--text-secondary)" }}>
+              <a href="https://www.tiktok.com/@hicare7?_r=1&_t=ZS-965H6V04etY" aria-label="TikTok" style={{ color: "var(--text-secondary)" }}>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5v3a8 8 0 0 1-8-8H7v11a4 4 0 0 0 2 0z" />
-                </svg>
-              </a>
-              <a href="#" aria-label="GitHub" style={{ color: "var(--text-secondary)" }}>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
                 </svg>
               </a>
             </div>
