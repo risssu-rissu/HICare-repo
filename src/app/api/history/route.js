@@ -19,6 +19,6 @@ export async function GET(request) {
     return NextResponse.json({ success: true, data: readings });
   } catch (err) {
     console.error("History Error:", err);
-    return NextResponse.json({ error: "Failed to fetch data" }, { status: 500 });
+    return NextResponse.json({ error: "Failed to fetch data", details: err.message }, { status: 500 });
   }
 }

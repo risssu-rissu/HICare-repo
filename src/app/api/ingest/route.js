@@ -22,6 +22,6 @@ export async function POST(request) {
     return NextResponse.json({ success: true, data: newReading });
   } catch (err) {
     console.error("Ingest Error:", err);
-    return NextResponse.json({ error: "Failed to save data" }, { status: 500 });
+    return NextResponse.json({ error: "Failed to save data", details: err.message }, { status: 500 });
   }
 }

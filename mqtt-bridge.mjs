@@ -68,7 +68,7 @@ client.on("message", async (topic, message) => {
       console.log(`   ID: ${data.data._id}`);
       console.log(`   Time: ${data.data.timestamp}\n`);
     } else {
-      console.error("❌ API Error:", data.error);
+      console.error("❌ API Error:", data.error, data.details || "");
     }
   } catch (err) {
     console.error("❌ Failed to send to API:", err.message);
