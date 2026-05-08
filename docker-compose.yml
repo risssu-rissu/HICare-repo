@@ -22,5 +22,15 @@ services:
       - mongodb_data:/data/db
     restart: always
 
+  bridge:
+    build:
+      context: .
+      dockerfile: Dockerfile.bridge
+    environment:
+      - API_URL=http://web:3000/api/ingest
+    depends_on:
+      - web
+    restart: always
+
 volumes:
   mongodb_data:

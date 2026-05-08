@@ -15,7 +15,7 @@ const MQTT_PASS = "HiCare-pajri95";
 const MQTT_TOPIC = "sensor/bpm";
 
 // ─── Next.js API endpoint ───
-const API_URL = "http://localhost:3000/api/ingest";
+const API_URL = process.env.API_URL || "http://localhost:3000/api/ingest";
 
 // ─── Connect to HiveMQ Cloud ───
 console.log("🔌 Connecting to HiveMQ Cloud...");
