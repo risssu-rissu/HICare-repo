@@ -634,7 +634,7 @@ export default function LandingPage() {
                       <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
                     </svg>
                   </a>
-                  <a href="" aria-label="LinkedIn">
+                  <a href="https://www.linkedin.com/in/azri-azwa-putra-61a027408" aria-label="LinkedIn">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z" />
                       <circle cx="4" cy="4" r="2" />
