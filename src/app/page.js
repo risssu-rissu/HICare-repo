@@ -674,7 +674,7 @@ export default function LandingPage() {
         <div className="container footer-inner">
           <div className="footer-brand">
             <Link href="#" className="nav-logo">
-              <img src="/favicon.svg" alt="HiCare" />
+              <img src="/logo.png" alt="HiCare" />
               <span>HiCare</span>
             </Link>
             <p>Monitoring detak jantung IoT cerdas<br />didukung oleh Pulse Sensor Amped.</p>
