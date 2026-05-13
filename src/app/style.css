@@ -43,6 +43,100 @@
   --font: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
+/* ─── Dashboard Header Elements ─── */
+.dashboard-title {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.9);
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.header-btn-home {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.8rem;
+  background: var(--blue-50);
+  color: var(--blue-700);
+  border: 1px solid var(--blue-100);
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.header-btn-home:hover {
+  background: var(--blue-100);
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-light);
+  font-size: 0.9rem;
+}
+
+.admin-badge {
+  background: var(--primary);
+  color: #fff;
+  padding: 0.2rem 0.6rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+.user-name {
+  font-weight: 500;
+}
+
+.btn-logout {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--text-light);
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+}
+
+.btn-logout:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #fff;
+}
+
+/* ─── Delete History Button ─── */
+.btn-delete-history {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.9rem;
+  border-radius: 8px;
+  border: 1px solid rgba(198, 40, 40, 0.2);
+  background: rgba(198, 40, 40, 0.06);
+  color: #C62828;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-delete-history:hover {
+  background: rgba(198, 40, 40, 0.12);
+  border-color: rgba(198, 40, 40, 0.35);
+  transform: translateY(-1px);
+}
+
 /* ─── Reset & Base ─── */
 *,
 *::before,
@@ -547,8 +641,51 @@
 
 @media (max-width: 768px) {
   .header {
-    padding: 0 1rem;
+    padding: 0.5rem 1rem;
+    height: auto;
+    flex-wrap: wrap;
     gap: 0.5rem;
+  }
+
+  .logo span {
+    display: none;
+  }
+
+  .dashboard-title {
+    display: none;
+  }
+
+  .header-actions {
+    gap: 0.4rem;
+    justify-content: flex-end;
+    flex: 1;
+  }
+
+  .header-btn-home {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.78rem;
+  }
+
+  .user-name {
+    display: none;
+  }
+
+  .admin-badge {
+    font-size: 0.65rem;
+    padding: 0.15rem 0.45rem;
+  }
+
+  .btn-logout {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.78rem;
+  }
+
+  .btn-delete-history span {
+    display: none;
+  }
+
+  .btn-delete-history {
+    padding: 0.4rem;
   }
 
   .nav-links {
@@ -594,6 +731,17 @@
   .chart-section,
   .panel {
     padding: 1.25rem;
+  }
+
+  .history-table thead th,
+  .history-table td {
+    padding: 0.6rem 0.5rem;
+    font-size: 0.78rem;
+  }
+
+  .connection-badge {
+    font-size: 0.7rem;
+    padding: 0.25rem 0.6rem;
   }
 }
 

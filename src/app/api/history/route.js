@@ -22,3 +22,20 @@ export async function GET(request) {
     return NextResponse.json({ error: "Failed to fetch data", details: err.message }, { status: 500 });
   }
 }
+
+export async function DELETE() {
+  try {
+    await dbConnect();
+
+    const result = await BpmReading.deleteMany({});
+
+    return NextResponse.json({
+      success: true,
+      message: `${result.deletedCount} data sesi berhasil dihapus.`,
+      deletedCount: result.deletedCount,
+    });
+  } catch (err) {
+    console.error("Delete History Error:", err);
+    return NextResponse.json({ error: "Failed to delete data", details: err.message }, { status: 500 });
+  }
+}

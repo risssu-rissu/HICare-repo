@@ -10,6 +10,7 @@ export default function LandingPage() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [heroBpm, setHeroBpm] = useState(72);
+  const [openFaq, setOpenFaq] = useState(null);
   const canvasRef = useRef(null);
   const { user } = useAuth();
 
@@ -222,6 +223,11 @@ export default function LandingPage() {
             <li>
               <a href="#product" onClick={(e) => handleSmoothScroll(e, "#product")}>
                 Produk
+              </a>
+            </li>
+            <li>
+              <a href="#faq" onClick={(e) => handleSmoothScroll(e, "#faq")}>
+                FAQ
               </a>
             </li>
             {isMenuOpen && (
@@ -670,6 +676,73 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* ========== FAQ Section ========== */}
+      <section className="section faq-section" id="faq">
+        <div className="container">
+          <div className="section-label">FAQ</div>
+          <h2 className="section-heading">
+            Pertanyaan Yang<br />
+            <span className="gradient-text">Sering Ditanyakan</span>
+          </h2>
+          <p className="section-subheading">Jawaban untuk pertanyaan umum tentang HiCare dan cara kerjanya</p>
+
+          <div className="faq-list">
+            {[
+              {
+                q: "Apa itu HiCare?",
+                a: "HiCare adalah sistem monitoring detak jantung berbasis IoT yang menggunakan Pulse Sensor Amped dan ESP32 untuk memantau detak jantung secara real-time melalui website."
+              },
+              {
+                q: "Untuk mendeteksnya pake sensor apa? dan bagimana cara kerjanya?",
+                a: "HIcare menggunakan Pulse Sensor Amped untuk medeteksi detak jantung. Pulse Sensor Amped menggunakan metode Photoplethysmography (PPG), yaitu mendeteksi perubahan volume darah di pembuluh kapiler menggunakan cahaya LED hijau. Data analog yang dihasilkan kemudian diproses oleh ESP32 untuk menghitung BPM."
+              },
+
+              {
+                q: "Berapa akurasi pembacaan BPM?",
+                a: "Pulse Sensor Amped memiliki akurasi ±1 BPM dalam kondisi penggunaan yang optimal. Walaupun tidak seakurat sensor detak jantung yang digunakan pada rumah sakit."
+              },
+              {
+                q: "Mengapa HiCare Dibuat?",
+                a: "HiCare dibuat untuk mengetahui kondisi detak jantung sejak dini agar kita bisa mencegah jika terjadi ketidaknormalan yang teerus menerus pada detak jantung kita."
+              },
+              {
+                q: "Apakah bisa mengakses riwayat data?",
+                a: "Tentu, anda bisa mengakses riwayat data detak jantung anda di dashboard yang sudah disediakan."
+              },
+            ].map((item, index) => (
+              <div
+                className={`faq-item ${openFaq === index ? "faq-open" : ""}`}
+                key={index}
+              >
+                <button
+                  className="faq-question"
+                  onClick={() => setOpenFaq(openFaq === index ? null : index)}
+                  aria-expanded={openFaq === index}
+                >
+                  <span>{item.q}</span>
+                  <svg
+                    className="faq-chevron"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <polyline points="6 9 12 15 18 9" />
+                  </svg>
+                </button>
+                <div className="faq-answer">
+                  <p>{item.a}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <footer className="footer" id="footer">
         <div className="container footer-inner">
           <div className="footer-brand">
@@ -684,6 +757,7 @@ export default function LandingPage() {
             <a href="#features" onClick={(e) => handleSmoothScroll(e, "#features")}>Fitur</a>
             <a href="#how-it-works" onClick={(e) => handleSmoothScroll(e, "#how-it-works")}>Cara Kerja</a>
             <a href="#product" onClick={(e) => handleSmoothScroll(e, "#product")}>Produk</a>
+            <a href="#faq" onClick={(e) => handleSmoothScroll(e, "#faq")}>FAQ</a>
             <Link href="/dashboard">Dashboard</Link>
           </div>
           <div className="footer-links">

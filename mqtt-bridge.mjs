@@ -9,7 +9,7 @@
 import mqtt from "mqtt";
 
 // ─── MQTT Configuration (must match your ESP32 code) ───
-const MQTT_BROKER = "mqtts://8859982a2a634180bd5b422958b7bf51.s1.eu.hivemq.cloud:8884/mqtt";
+const MQTT_BROKER = "mqtts://8859982a2a634180bd5b422958b7bf51.s1.eu.hivemq.cloud:8883";
 const MQTT_USER = "hicare-paris-ajri";
 const MQTT_PASS = "HiCare-pajri95";
 const MQTT_TOPIC = "sensor/bpm";

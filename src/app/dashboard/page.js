@@ -8,6 +8,18 @@ import HeartChart from "@/components/HeartChart";
 import Waveform from "@/components/Waveform";
 import "../style.css";
 
+// Inline confirm dialog styles
+const modalOverlayStyle = {
+  position: "fixed", inset: 0, zIndex: 9999,
+  background: "rgba(0,0,0,0.45)", backdropFilter: "blur(4px)",
+  display: "flex", alignItems: "center", justifyContent: "center",
+};
+const modalBoxStyle = {
+  background: "#fff", borderRadius: "16px", padding: "2rem",
+  maxWidth: "400px", width: "90%", textAlign: "center",
+  boxShadow: "0 20px 60px rgba(0,0,0,0.15)",
+};
+
 export default function Dashboard() {
   const { user, loading, logout } = useAuth();
   const router = useRouter();
@@ -18,6 +30,8 @@ export default function Dashboard() {
   const [currentAvgBPM, setCurrentAvgBPM] = useState(0);
   const [prevAvgBPM, setPrevAvgBPM] = useState(0);
   const [isConnected, setIsConnected] = useState(false);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   // Health classify
   const classifyHealth = (bpm) => {
@@ -64,6 +78,29 @@ export default function Dashboard() {
     }
   }, []);
 
+  // Delete all history
+  const handleDeleteHistory = async () => {
+    setIsDeleting(true);
+    try {
+      const res = await fetch("/api/history", { method: "DELETE" });
+      const result = await res.json();
+      if (result.success) {
+        setHistory([]);
+        setCurrentAvgBPM(0);
+        setPrevAvgBPM(0);
+        setIsConnected(false);
+      } else {
+        alert("Gagal menghapus data: " + (result.error || "Unknown error"));
+      }
+    } catch (error) {
+      console.error("Delete error:", error);
+      alert("Gagal menghapus data.");
+    } finally {
+      setIsDeleting(false);
+      setShowDeleteConfirm(false);
+    }
+  };
+
   // Polling data
   useEffect(() => {
     fetchHistory();
@@ -108,21 +145,19 @@ export default function Dashboard() {
           <span>HiCare</span>
         </div>
 
-        <div style={{ fontWeight: "600", fontSize: "1.1rem", color: "rgba(255, 255, 255, 0.9)", letterSpacing: "0.5px" }}>
-          HiCare Dashboard
-        </div>
+        <div className="dashboard-title">HiCare Dashboard</div>
 
-        <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-          <Link href="/" className="nav-back" style={{ textDecoration: "none", display: "flex", alignItems: "center", gap: "0.4rem", padding: "0.4rem 0.8rem", background: "var(--blue-50)", color: "var(--blue-700)", border: "1px solid var(--blue-100)", borderRadius: "6px", fontSize: "0.85rem", fontWeight: "600" }}>
+        <div className="header-actions">
+          <Link href="/" className="header-btn-home">
             <span>Home</span>
           </Link>
 
-          <div className="user-profile" style={{ display: "flex", alignItems: "center", gap: "0.5rem", color: "var(--text-light)", fontSize: "0.9rem" }}>
-            {user.role === "admin" && <span style={{ background: "var(--primary)", color: "#fff", padding: "0.2rem 0.6rem", borderRadius: "12px", fontSize: "0.75rem", fontWeight: "bold" }}>ADMIN</span>}
-            <span style={{ fontWeight: 500 }}>{user.name}</span>
+          <div className="user-profile">
+            {user.role === "admin" && <span className="admin-badge">ADMIN</span>}
+            <span className="user-name">{user.name}</span>
           </div>
 
-          <button onClick={logout} style={{ background: "transparent", border: "1px solid rgba(255,255,255,0.2)", color: "var(--text-light)", padding: "0.4rem 0.8rem", borderRadius: "6px", cursor: "pointer", fontSize: "0.85rem", transition: "all 0.2s" }}>
+          <button onClick={logout} className="btn-logout">
             Keluar
           </button>
 
@@ -200,6 +235,21 @@ export default function Dashboard() {
           <div className="panel fade-in" id="history-panel">
             <div className="section-header">
               <h2 className="section-title">Sesi Scanning Terbaru</h2>
+              {history.length > 0 && (
+                <button
+                  className="btn-delete-history"
+                  onClick={() => setShowDeleteConfirm(true)}
+                  title="Hapus semua riwayat"
+                >
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="3 6 5 6 21 6" />
+                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                    <line x1="10" y1="11" x2="10" y2="17" />
+                    <line x1="14" y1="11" x2="14" y2="17" />
+                  </svg>
+                  <span>Hapus Riwayat</span>
+                </button>
+              )}
             </div>
             <div style={{ maxHeight: "360px", overflowY: "auto", paddingRight: "5px" }}>
               <table className="history-table">
@@ -233,6 +283,34 @@ export default function Dashboard() {
             </div>
           </div>
         </div>
+
+        {/* Delete Confirmation Modal */}
+        {showDeleteConfirm && (
+          <div style={modalOverlayStyle} onClick={() => setShowDeleteConfirm(false)}>
+            <div style={modalBoxStyle} onClick={(e) => e.stopPropagation()}>
+              <div style={{ fontSize: "2.5rem", marginBottom: "0.75rem" }}>🗑️</div>
+              <h3 style={{ fontSize: "1.2rem", fontWeight: 700, color: "var(--text-primary)", marginBottom: "0.5rem" }}>Hapus Semua Riwayat?</h3>
+              <p style={{ fontSize: "0.9rem", color: "var(--text-secondary)", marginBottom: "1.5rem", lineHeight: 1.6 }}>
+                Semua data sesi scanning akan dihapus secara permanen. Tindakan ini tidak dapat dibatalkan.
+              </p>
+              <div style={{ display: "flex", gap: "0.75rem", justifyContent: "center" }}>
+                <button
+                  onClick={() => setShowDeleteConfirm(false)}
+                  style={{ padding: "0.6rem 1.5rem", borderRadius: "8px", border: "1px solid var(--border)", background: "#fff", cursor: "pointer", fontWeight: 600, fontSize: "0.9rem", color: "var(--text-secondary)" }}
+                >
+                  Batal
+                </button>
+                <button
+                  onClick={handleDeleteHistory}
+                  disabled={isDeleting}
+                  style={{ padding: "0.6rem 1.5rem", borderRadius: "8px", border: "none", background: "linear-gradient(135deg, #C62828, #E53935)", color: "#fff", cursor: isDeleting ? "not-allowed" : "pointer", fontWeight: 600, fontSize: "0.9rem", opacity: isDeleting ? 0.7 : 1 }}
+                >
+                  {isDeleting ? "Menghapus..." : "Ya, Hapus"}
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </main>
 
       <footer className="footer">

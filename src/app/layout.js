@@ -14,7 +14,11 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
   title: "HiCare - IoT Heart Rate Monitor",
-  description: "Real-time IoT heart rate monitoring dashboard powered by Next.js and Supabase.",
+  description: "Real-time IoT heart rate monitoring dashboard powered by Next.js and MongoDB.",
+  icons: {
+    icon: "/logo.png",
+    apple: "/logo.png",
+  },
 };
 
 export default function RootLayout({ children }) {
