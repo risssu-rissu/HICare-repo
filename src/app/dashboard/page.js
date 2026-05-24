@@ -33,6 +33,29 @@ export default function Dashboard() {
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
 
+  const [showPrintModal, setShowPrintModal] = useState(false);
+  const [printSession, setPrintSession] = useState(null);
+  const [patientName, setPatientName] = useState("");
+  const [patientAge, setPatientAge] = useState("");
+  const [patientGender, setPatientGender] = useState("Laki-laki");
+  const [examinerName, setExaminerName] = useState("");
+
+  const handlePrintClick = (session) => {
+    setPrintSession(session);
+    setPatientName("");
+    setPatientAge("");
+    setPatientGender("Laki-laki");
+    setExaminerName(user?.name || "");
+    setShowPrintModal(true);
+  };
+
+  const executePrint = () => {
+    setShowPrintModal(false);
+    setTimeout(() => {
+      window.print();
+    }, 100);
+  };
+
   // Health classify
   const classifyHealth = (bpm) => {
     if (bpm < 60) return { label: "Low", cls: "text-blue", pill: "elevated" };
@@ -258,6 +281,7 @@ export default function Dashboard() {
                     <th>Tanggal & Waktu</th>
                     <th>Avg BPM</th>
                     <th>Status</th>
+                    <th style={{ textAlign: "center" }}>Aksi</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -271,11 +295,21 @@ export default function Dashboard() {
                       </td>
                       <td><strong>{ses.avgBpm}</strong> BPM</td>
                       <td><span className={`status-pill ${classifyHealth(ses.avgBpm).pill}`}>{classifyHealth(ses.avgBpm).label}</span></td>
+                      <td style={{ textAlign: "center" }}>
+                        <button 
+                          onClick={() => handlePrintClick(ses)}
+                          style={{ padding: "0.4rem 0.8rem", borderRadius: "6px", border: "1px solid var(--blue-100)", background: "var(--blue-50)", color: "var(--blue-700)", cursor: "pointer", fontSize: "0.8rem", fontWeight: 600, transition: "all 0.2s" }}
+                          onMouseOver={(e) => { e.target.style.background = "var(--blue-100)"; }}
+                          onMouseOut={(e) => { e.target.style.background = "var(--blue-50)"; }}
+                        >
+                          Print
+                        </button>
+                      </td>
                     </tr>
                   ))}
                   {history.length === 0 && (
                     <tr>
-                      <td colSpan="3" style={{ textAlign: "center", padding: "2rem", color: "var(--text-light)" }}>Belum ada sesi pemindaian</td>
+                      <td colSpan="4" style={{ textAlign: "center", padding: "2rem", color: "var(--text-light)" }}>Belum ada sesi pemindaian</td>
                     </tr>
                   )}
                 </tbody>
@@ -311,7 +345,162 @@ export default function Dashboard() {
             </div>
           </div>
         )}
+
+        {/* Print Modal */}
+        {showPrintModal && (
+          <div style={modalOverlayStyle} onClick={() => setShowPrintModal(false)}>
+            <div style={modalBoxStyle} onClick={(e) => e.stopPropagation()}>
+              <div style={{ fontSize: "2rem", marginBottom: "0.5rem" }}>🖨️</div>
+              <h3 style={{ fontSize: "1.2rem", fontWeight: 700, color: "var(--text-primary)", marginBottom: "1rem" }}>Print Hasil Scanning</h3>
+              <div style={{ marginBottom: "1rem", textAlign: "left" }}>
+                <label style={{ display: "block", fontSize: "0.9rem", color: "var(--text-secondary)", marginBottom: "0.5rem", fontWeight: 600 }}>Nama Pasien:</label>
+                <input 
+                  type="text" 
+                  value={patientName} 
+                  onChange={(e) => setPatientName(e.target.value)} 
+                  placeholder="Masukkan nama pasien..."
+                  style={{ width: "100%", padding: "0.75rem", borderRadius: "8px", border: "1px solid rgba(0,0,0,0.1)", fontSize: "1rem", outline: "none", boxSizing: "border-box" }}
+                  autoFocus
+                />
+              </div>
+              <div style={{ display: "flex", gap: "1rem", marginBottom: "1rem", textAlign: "left" }}>
+                <div style={{ flex: 1 }}>
+                  <label style={{ display: "block", fontSize: "0.9rem", color: "var(--text-secondary)", marginBottom: "0.5rem", fontWeight: 600 }}>Umur:</label>
+                  <input 
+                    type="number" 
+                    value={patientAge} 
+                    onChange={(e) => setPatientAge(e.target.value)} 
+                    placeholder="Contoh: 19"
+                    style={{ width: "100%", padding: "0.75rem", borderRadius: "8px", border: "1px solid rgba(0,0,0,0.1)", fontSize: "1rem", outline: "none", boxSizing: "border-box" }}
+                  />
+                </div>
+                <div style={{ flex: 1 }}>
+                  <label style={{ display: "block", fontSize: "0.9rem", color: "var(--text-secondary)", marginBottom: "0.5rem", fontWeight: 600 }}>Jenis Kelamin:</label>
+                  <select 
+                    value={patientGender} 
+                    onChange={(e) => setPatientGender(e.target.value)} 
+                    style={{ width: "100%", padding: "0.75rem", borderRadius: "8px", border: "1px solid rgba(0,0,0,0.1)", fontSize: "1rem", outline: "none", boxSizing: "border-box", background: "#fff", cursor: "pointer" }}
+                  >
+                    <option value="Laki-laki">Laki-laki</option>
+                    <option value="Perempuan">Perempuan</option>
+                  </select>
+                </div>
+              </div>
+              <div style={{ marginBottom: "1.5rem", textAlign: "left" }}>
+                <label style={{ display: "block", fontSize: "0.9rem", color: "var(--text-secondary)", marginBottom: "0.5rem", fontWeight: 600 }}>Nama Pemeriksa / Dokter:</label>
+                <input 
+                  type="text" 
+                  value={examinerName} 
+                  onChange={(e) => setExaminerName(e.target.value)} 
+                  placeholder="Nama Pemeriksa..."
+                  style={{ width: "100%", padding: "0.75rem", borderRadius: "8px", border: "1px solid rgba(0,0,0,0.1)", fontSize: "1rem", outline: "none", boxSizing: "border-box" }}
+                />
+              </div>
+              <div style={{ display: "flex", gap: "0.75rem", justifyContent: "center" }}>
+                <button
+                  onClick={() => setShowPrintModal(false)}
+                  style={{ padding: "0.6rem 1.5rem", borderRadius: "8px", border: "1px solid rgba(0,0,0,0.1)", background: "#fff", cursor: "pointer", fontWeight: 600, fontSize: "0.9rem", color: "var(--text-secondary)" }}
+                >
+                  Batal
+                </button>
+                <button
+                  onClick={executePrint}
+                  disabled={!patientName.trim()}
+                  style={{ padding: "0.6rem 1.5rem", borderRadius: "8px", border: "none", background: "var(--primary)", color: "#fff", cursor: !patientName.trim() ? "not-allowed" : "pointer", fontWeight: 600, fontSize: "0.9rem", opacity: !patientName.trim() ? 0.7 : 1 }}
+                >
+                  Print Sekarang
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </main>
+
+      {/* Printable Area */}
+      {printSession && (() => {
+        const dateObj = new Date(printSession.timestamp);
+        const yyyymmdd = dateObj.toISOString().slice(0,10).replace(/-/g, '');
+        const shortId = printSession._id ? printSession._id.slice(-4).toUpperCase() : Math.floor(Math.random() * 1000).toString().padStart(3, '0');
+        const scanId = `HC-${yyyymmdd}-${shortId}`;
+        const healthStatus = classifyHealth(printSession.avgBpm);
+        
+        let keterangan = "";
+        if (healthStatus.label === "Low") keterangan = "Detak jantung di bawah normal (Bradycardia). Disarankan berkonsultasi dengan tenaga medis jika sering terjadi.";
+        else if (healthStatus.label === "Normal") keterangan = "Detak jantung berada dalam kondisi normal. Pertahankan gaya hidup sehat.";
+        else if (healthStatus.label === "Elevated") keterangan = "Detak jantung sedikit di atas normal. Perhatikan kondisi fisik dan tingkat stres saat ini.";
+        else if (healthStatus.label === "High") keterangan = "Detak jantung tinggi (Tachycardia). Harap beristirahat dan hubungi tenaga medis jika berlanjut.";
+
+        return (
+          <div id="print-area" style={{ padding: "2rem", fontFamily: "sans-serif", color: "#000", background: "#fff" }}>
+            {/* Header */}
+            <div style={{ display: "flex", alignItems: "center", borderBottom: "2px solid #000", paddingBottom: "1.5rem", marginBottom: "2rem" }}>
+              <img src="/logo.png" alt="Logo HiCare" style={{ width: "80px", height: "80px", marginRight: "1.5rem" }} />
+              <div style={{ flex: 1 }}>
+                <h1 style={{ margin: 0, fontSize: "26px", color: "#000", textTransform: "uppercase", fontWeight: "900", letterSpacing: "1px" }}>HiCare</h1>
+                <h2 style={{ margin: "0.3rem 0", fontSize: "16px", color: "#333", fontWeight: "600" }}>Sistem Pemantauan Detak Jantung Berbasis IoT</h2>
+              </div>
+              <div style={{ textAlign: "right", borderLeft: "2px solid #ddd", paddingLeft: "1.5rem" }}>
+                <h2 style={{ margin: 0, fontSize: "20px", color: "#000", fontWeight: "800" }}>HASIL SCANNING</h2>
+                <p style={{ margin: "0.4rem 0 0 0", fontSize: "15px", fontWeight: "bold", background: "#f0f4f8", padding: "0.4rem 0.8rem", borderRadius: "6px", display: "inline-block", color: "#1565C0", border: "1px solid #d0e1f9" }}>ID: {scanId}</p>
+              </div>
+            </div>
+            
+            {/* Patient Info */}
+            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "15px", marginBottom: "2rem" }}>
+              <tbody>
+                <tr>
+                  <td style={{ padding: "0.8rem 0", borderBottom: "1px solid #ddd", width: "30%", fontWeight: "bold" }}>Nama Pasien</td>
+                  <td style={{ padding: "0.8rem 0", borderBottom: "1px solid #ddd" }}>: {patientName || "-"}</td>
+                </tr>
+                <tr>
+                  <td style={{ padding: "0.8rem 0", borderBottom: "1px solid #ddd", fontWeight: "bold" }}>Umur</td>
+                  <td style={{ padding: "0.8rem 0", borderBottom: "1px solid #ddd" }}>: {patientAge ? `${patientAge} Tahun` : "-"}</td>
+                </tr>
+                <tr>
+                  <td style={{ padding: "0.8rem 0", borderBottom: "1px solid #ddd", fontWeight: "bold" }}>Jenis Kelamin</td>
+                  <td style={{ padding: "0.8rem 0", borderBottom: "1px solid #ddd" }}>: {patientGender}</td>
+                </tr>
+                <tr>
+                  <td style={{ padding: "0.8rem 0", borderBottom: "1px solid #ddd", fontWeight: "bold" }}>Waktu Pemindaian</td>
+                  <td style={{ padding: "0.8rem 0", borderBottom: "1px solid #ddd" }}>: {dateObj.toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })} &middot; {dateObj.toLocaleTimeString('id-ID', { hour: "2-digit", minute: "2-digit", second: "2-digit" })}</td>
+                </tr>
+                <tr>
+                  <td style={{ padding: "0.8rem 0", borderBottom: "1px solid #ddd", fontWeight: "bold" }}>Rata-rata BPM</td>
+                  <td style={{ padding: "0.8rem 0", borderBottom: "1px solid #ddd", fontSize: "22px" }}>: <strong>{printSession.avgBpm}</strong> <span style={{fontSize: "14px", fontWeight: "normal"}}>BPM</span></td>
+                </tr>
+                <tr>
+                  <td style={{ padding: "0.8rem 0", borderBottom: "1px solid #ddd", fontWeight: "bold" }}>Status Kesehatan</td>
+                  <td style={{ padding: "0.8rem 0", borderBottom: "1px solid #ddd" }}>: <strong>{healthStatus.label}</strong></td>
+                </tr>
+              </tbody>
+            </table>
+
+            {/* Keterangan */}
+            <div style={{ marginTop: "1rem", padding: "1.5rem", background: "#f8f9fa", borderRadius: "8px", border: "1px solid #e9ecef" }}>
+              <h3 style={{ margin: "0 0 0.5rem 0", fontSize: "15px", color: "#333", fontWeight: "bold" }}>Keterangan:</h3>
+              <p style={{ margin: 0, fontSize: "15px", color: "#111", lineHeight: "1.5" }}>{keterangan}</p>
+              <div style={{ marginTop: "0.8rem", paddingTop: "0.8rem", borderTop: "1px solid #dee2e6" }}>
+                <p style={{ margin: 0, fontSize: "13px", color: "#6c757d" }}>* Referensi Normal BPM Dewasa: 60–100 BPM.</p>
+                <p style={{ margin: "0.2rem 0 0 0", fontSize: "13px", color: "#6c757d" }}>* Nilai detak jantung dapat bervariasi bergantung pada usia, aktivitas fisik, stres, and kondisi medis bawaan pasien.</p>
+              </div>
+            </div>
+
+            {/* Signature */}
+            <div style={{ marginTop: "4rem", display: "flex", justifyContent: "flex-end" }}>
+              <div style={{ textAlign: "center", fontSize: "14px", width: "220px" }}>
+                <p style={{ marginBottom: "5rem", marginTop: 0 }}>Petugas / Dokter Pemeriksa</p>
+                <p style={{ margin: 0, borderTop: "1px solid #000", paddingTop: "0.5rem", fontWeight: "bold" }}>( {examinerName || "............................................"} )</p>
+                <p style={{ margin: "0.2rem 0 0 0", color: "#555", fontSize: "12px" }}>Tanda Tangan & Nama Terang</p>
+              </div>
+            </div>
+
+            {/* Footer */}
+            <div style={{ marginTop: "4rem", borderTop: "1px dashed #ccc", paddingTop: "1rem", textAlign: "center", fontSize: "12px", color: "#777" }}>
+              <p style={{ margin: 0 }}>Waktu Cetak: {new Date().toLocaleString('id-ID')}</p>
+            </div>
+          </div>
+        );
+      })()}
 
       <footer className="footer">
         <p>&copy; 2026 <strong>HiCare</strong> — IoT Heart Rate Monitor &middot; Mongoose Edition &middot; v2.0.0</p>

@@ -11,7 +11,7 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  
+
   const { login } = useAuth();
   const router = useRouter();
 
@@ -22,7 +22,7 @@ export default function Login() {
 
     try {
       const { error: authError } = await login(email, password);
-      
+
       if (authError) {
         setError(authError.message);
       } else {
@@ -48,7 +48,7 @@ export default function Login() {
 
       <div className="auth-container">
         <div style={{ textAlign: "center", marginBottom: "1.5rem" }}>
-          <img src="/favicon.svg" alt="HiCare Logo" style={{ width: "48px", height: "48px", marginBottom: "1rem" }} />
+          <img src="/logo.png" alt="HiCare Logo" style={{ width: "48px", height: "48px", marginBottom: "1rem" }} />
           <h1 className="auth-title auth-title-gradient">Selamat Datang Kembali</h1>
           <p className="auth-subtitle">Masuk ke dashboard HiCare Anda</p>
         </div>
@@ -58,27 +58,27 @@ export default function Login() {
         <form className="auth-form" onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="email">Alamat Email</label>
-            <input 
-              type="email" 
-              id="email" 
-              className="form-input" 
+            <input
+              type="email"
+              id="email"
+              className="form-input"
               placeholder="anda@contoh.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              required 
+              required
             />
           </div>
 
           <div className="form-group">
             <label htmlFor="password">Kata Sandi</label>
-            <input 
-              type="password" 
-              id="password" 
-              className="form-input" 
+            <input
+              type="password"
+              id="password"
+              className="form-input"
               placeholder="••••••••"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              required 
+              required
             />
           </div>
 
